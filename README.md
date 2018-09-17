@@ -54,3 +54,15 @@ https://symfony.com/doc/current/doctrine/common_extensions.html
 > comment DataFxitures/AppFixtures.php setDateCreation
 
 ```php bin/console doctrine:query:sql 'SELECT * FROM recette'```
+
+## On veut afficher les recettes et navigier
+> edit controller pour ajouter le findAll et le show
+
+https://symfony.com/doc/current/doctrine.html#fetching-objects-from-the-database
+
+> edit templates/base pour rajouter bootstrap
+> edit templates/default/index pour afficher chaque recette 
+
+https://twig.symfony.com/doc/2.x/tags/for.html
+> add {{ path('recette_show', {'slug': recette.slug}) }}
+https://symfony.com/doc/current/templating.html#linking-to-pages

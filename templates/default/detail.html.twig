@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello !{% endblock %}
+
+{% block body %}
+
+<main role="main" class="container">
+        <h1 class="mt-5">{{recette.titre}}</h1>
+        <p class="lead">{{recette.description}}</p>
+        <p>Créée le {{recette.dateCreation|date('d-m-Y H:i')}}</p>
+        <a href="{{ path('index') }}" class="btn btn btn-outline-secondary">Retour</a>
+
+      </main>
+{% endblock %}
