@@ -1,7 +1,12 @@
+## On veut un mini serveur
 
 ```php bin/console server:run```
 
+## On veut une page d'accueil
+
 ```php bin/console make:controller```
+
+## On veut une base de données
 
 > edit .env
 
@@ -11,6 +16,41 @@
 
 https://symfony.com/doc/current/doctrine.html
 
+https://symfony.com/doc/master/bundles/DoctrineMigrationsBundle/index.html
+
 https://symfony.com/doc/current/doctrine/associations.html
 
+## On veut des données de tests
+
+https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+
+```composer require --dev doctrine/doctrine-fixtures-bundle```
+
+> creer DataFxitures/AppFixtures.php
+
+```php bin/console doctrine:fixtures:load```
+
+## On veut avoir des fixtures aléatoires
+
+```composer require fzaninotto/faker```
+
+> edit DataFxitures/AppFixtures.php
+
+```php bin/console doctrine:fixtures:load```
+
+```php bin/console doctrine:query:sql 'SELECT * FROM recette'```
+
+## On veut automatiser la mise à jour de la date de création et la création d'un slug
+
 https://symfony.com/doc/current/doctrine/common_extensions.html
+
+```composer require stof/doctrine-extensions-bundle```
+
+> edit packages>stof_doctrine_extensions.yml
+
+> edit Entity/Recette.php Add       * @Gedmo\Timestampable(on="create") and slug props
+
+
+> comment DataFxitures/AppFixtures.php setDateCreation
+
+```php bin/console doctrine:query:sql 'SELECT * FROM recette'```

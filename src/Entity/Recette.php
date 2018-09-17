@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RecetteRepository")
  */
@@ -23,6 +24,7 @@ class Recette
     private $titre;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $dateCreation;
@@ -36,6 +38,13 @@ class Recette
      * @ORM\OneToMany(targetEntity="App\Entity\Avis", mappedBy="recette")
      */
     private $avis;
+
+    /**
+     * @Gedmo\Slug(fields={"titre", "dateCreation"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
 
     public function __construct()
     {
@@ -89,5 +98,10 @@ class Recette
     public function getAvis(): Collection
     {
         return $this->avis;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
