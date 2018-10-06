@@ -1,0 +1,72 @@
+{% extends 'default/layout.html.twig' %}
+
+{% block title %}{{ "Contact"| trans}} {% endblock %}
+
+
+{% block main %}
+
+<main role="main" class="main contact">
+    <!-- Content goes here -->
+    <div class="jumbotron">
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-12">
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ flashMessage }}
+                    </div>
+                    {% endfor %}
+                    <h1>{{ "Formulaire de contact"| trans}}</h1>
+
+                    <p>{{ "Pour toute demande d'information, merci de nous envoyer ce formulaire."| trans}}</p>
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal','role': 'form'} }) }}
+                    <div class="form-group">
+                        {{ form_errors(form) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.name, null, {'label_attr': {'class': 'col-lg-2 control-label'}}) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.name)}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.tel, null, {'label_attr': {'class': 'col-lg-2 control-label'}}) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.tel)}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.mail, null, {'label_attr': {'class': 'col-lg-2 control-label'}}) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.mail)}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.subject, null, {'label_attr': {'class': 'col-lg-2 control-label'}}) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.subject)}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.content, null, {'label_attr': {'class': 'col-lg-2 control-label'}}) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.content)}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            {{ form_widget(form.send)}}
+                        </div>
+                    </div>
+                    {{ form_widget(form) }}
+                    {{ form_rest(form) }}
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

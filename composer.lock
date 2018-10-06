@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74bb1017834511f02d07aa7656d5c32b",
+    "content-hash": "2e87945bd65f2f4fcb88fe9fee9e6217",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -3228,16 +3228,16 @@
         },
         {
             "name": "symfony/form",
-            "version": "v4.1.4",
+            "version": "v4.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/form.git",
-                "reference": "f9b2156c881dd881bacb0a953055a28f1a517536"
+                "reference": "360f22cdb0278d69fbd571b293df04065b2a2279"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/f9b2156c881dd881bacb0a953055a28f1a517536",
-                "reference": "f9b2156c881dd881bacb0a953055a28f1a517536",
+                "url": "https://api.github.com/repos/symfony/form/zipball/360f22cdb0278d69fbd571b293df04065b2a2279",
+                "reference": "360f22cdb0278d69fbd571b293df04065b2a2279",
                 "shasum": ""
             },
             "require": {
@@ -3305,7 +3305,7 @@
             ],
             "description": "Symfony Form Component",
             "homepage": "https://symfony.com",
-            "time": "2018-08-24T10:22:26+00:00"
+            "time": "2018-10-02T12:40:59+00:00"
         },
         {
             "name": "symfony/framework-bundle",

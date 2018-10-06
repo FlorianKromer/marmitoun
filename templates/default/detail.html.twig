@@ -9,28 +9,7 @@
   <p class="lead">{{recette.description}}</p>
   <p>Créée le {{recette.dateCreation|date('d-m-Y H:i')}}</p>
   <a href="{{ path('index') }}" class="btn btn btn-outline-secondary">Retour</a>
-  <button href="{{ path('index') }}" class="btn btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">Envoyer
-    par mail</a>
+
 
 </main>
-<div class="modal" tabindex="-1" role="dialog" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Envoyer par mail</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Envoyer</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-      </div>
-    </div>
-  </div>
-</div>
 {% endblock %}
