@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Contact
  *
- * @ORM\Entity
  */
 class Contact
 {
@@ -18,21 +17,18 @@ class Contact
     /**
      * @var string
       * @Assert\NotBlank()
-     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="subject", type="string", length=255)
      */
     private $subject;
 
     /**
      * @var string
      * @Assert\NotBlank()
-     * @ORM\Column(name="content", type="text")
      */
     private $content;
 
@@ -40,14 +36,12 @@ class Contact
      * @var string
      * @Assert\NotBlank()
 
-     * @ORM\Column(name="mail", type="string", length=255)
      */
     private $mail;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tel", type="string", length=255)
      */
     private $tel;
 
