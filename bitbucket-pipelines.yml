@@ -26,6 +26,7 @@ pipelines:
           - composer install
           - php bin/console doctrine:schema:update --force
           - php bin/console doctrine:fixtures:load -n
+          - composer require phpunit/phpunit
           - vendor/bin/phpunit
 
         services: 
