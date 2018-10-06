@@ -3,52 +3,51 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: flouch/symfony4-image-docker 
+image: flouch/symfony4-image-docker
 clone:
   depth: full
 pipelines:
   branches:
     production:
-    - step:
-        name: Build & test & deploy
-        deployment: production   # set to test, staging or production
+      - step:
+          name: Build & test & deploy
+          deployment: production # set to test, staging or production
 
-        caches:
-          - composer
-          - bundle
-        script:
-          - composer install
-          - php bin/console doctrine:schema:update --force
-          - php bin/console doctrine:fixtures:load -n
-          - php bin/phpunit
-# set HEROKU_API_KEY and HEROKU_APP_NAME environment variables
-          - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD
+          caches:
+            - composer
+            - bundle
+          script:
+            - composer install
+            - php bin/console doctrine:schema:update --force
+            - php bin/console doctrine:fixtures:load -n
+            # set HEROKU_API_KEY and HEROKU_APP_NAME environment variables
+            - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD
 
-        services: 
-          - mysql    
-        
-    # trigger: manual  # uncomment to have a manual step
+          services:
+            - mysql
+
+      # trigger: manual  # uncomment to have a manual step
 
     master:
-    - step:
-        name: Build & test
-        caches:
-          - composer
-          - bundle
-        script:
-          - composer install
-          - php bin/console doctrine:schema:update --force
-          - php bin/console doctrine:fixtures:load -n
-          - php bin/phpunit
+      - step:
+          name: Build & test
+          caches:
+            - composer
+            - bundle
+          script:
+            - composer install
+            - php bin/console doctrine:schema:update --force
+            - php bin/console doctrine:fixtures:load -n
+            - php bin/phpunit
 
-        services: 
-          - mysql            
-definitions: 
-  services: 
-    mysql: 
-      image: mysql:5.7  
-      environment: 
-        MYSQL_DATABASE: 'azerty'
-        MYSQL_ROOT_PASSWORD: '123456'
+          services:
+            - mysql
+definitions:
+  services:
+    mysql:
+      image: mysql:5.7
+      environment:
+        MYSQL_DATABASE: "azerty"
+        MYSQL_ROOT_PASSWORD: "123456"
   caches:
     bundle: vendor
