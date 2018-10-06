@@ -66,3 +66,24 @@ https://symfony.com/doc/current/doctrine.html#fetching-objects-from-the-database
 https://twig.symfony.com/doc/2.x/tags/for.html
 > add {{ path('recette_show', {'slug': recette.slug}) }}
 https://symfony.com/doc/current/templating.html#linking-to-pages
+
+## passage en api rest
+> composer require api
+
+https://api-platform.com/docs/core/getting-started/
+
+rajouter du mapping sur les entity
+> * @ApiResource
+
+curl -X GET "http://127.0.0.1:8000/api/recettes" -H "accept: application/ld+json"
+
+
+## ajouter des tests
+
+>  composer require --dev symfony/phpunit-bridge
+> ./bin/phpunit
+
+
+https://symfony.com/doc/current/testing.html
+
+>  composer require --dev symfony/browser-kit symfony/css-selector

@@ -6,8 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use ApiPlatform\Core\Annotation\ApiResource;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RecetteRepository")
+ * @ApiResource
+
  */
 class Recette
 {
