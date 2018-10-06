@@ -18,15 +18,15 @@ class ApiTest extends WebTestCase
         $this->assertTrue(
             $client->getResponse()->headers->contains(
                 'Content-Type',
-                'application/json'
+                'application/json; charset=utf-8'
             ),
             'the "Content-Type" header is "application/json"' // optional message shown on failure
         );
 
         $content = json_decode($client->getResponse()->getContent(), true);
-        // $this->assertInternalType('array', $content);
-        // $recette = $content[0];
-        // $this->assertArrayHasKey('titre', $recette);
+        $this->assertInternalType('array', $content);
+        $recette = $content[0];
+        $this->assertArrayHasKey('titre', $recette);
 
     }
 }
