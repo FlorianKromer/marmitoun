@@ -125,3 +125,27 @@ https://symfony.com/doc/current/email.html
 https://symfony.com/doc/current/logging.html
 
 `https://symfony.com/doc/current/logging.html`
+
+## avoir un dashboard admin
+
+avec easy admin
+`composer require admin`
+Open the config/packages/easy_admin.yaml file and add the following configuration:
+
+https://symfony.com/doc/master/bundles/EasyAdminBundle/book/your-first-backend.html
+
+controler l'accès dans security.yaml : https://symfony.com/doc/current/security.html
+
+>        - { path: ^/admin, roles: ROLE_ADMIN }
+
+```
+in_memory:
+            memory:
+                users:
+                    ryan:
+                        password: ryanpass
+                        roles: 'ROLE_USER'
+                    admin:
+                        password: kitten
+                        roles: 'ROLE_ADMIN'
+```
