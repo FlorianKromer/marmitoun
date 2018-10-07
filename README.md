@@ -1,6 +1,12 @@
-## On veut un mini serveur
+## On veut un mini serveur php
 
 `php bin/console server:run`
+
+## mais la prod tourne avec apache
+
+`composer require symfony/apache-pack`
+ça ajoute un htaccess dans le dossier public
+https://symfony.com/doc/current/setup/web_server_configuration.html
 
 ## On veut une page d'accueil
 
