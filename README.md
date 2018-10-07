@@ -39,6 +39,7 @@ https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
 ## On veut avoir des fixtures aléatoires
 
 `composer require fzaninotto/faker`
+`composer require mbezhanov/faker-provider-collection`
 
 > edit DataFxitures/AppFixtures.php
 
@@ -149,3 +150,22 @@ in_memory:
                         password: kitten
                         roles: 'ROLE_ADMIN'
 ```
+
+## on veut des vraies données
+
+on va scrapper marmitton
+on crée une "console command"
+https://symfony.com/doc/current/console.html
+
+on va avoir besoin d'un client pour aller récupérer des données "à l'extéieur"
+
+> composer require fabpot/goutte
+
+on scrap en récupérant les champs de la page qui nous interesse
+
+on inject doctrine pour persister les recettes
+
+en bonus une progress bar
+https://symfony.com/doc/current/components/console/helpers/progressbar.html
+
+on montre la photo de la recette si le champs img est renseigné

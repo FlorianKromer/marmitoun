@@ -116,6 +116,9 @@
     "egulias/email-validator": {
         "version": "2.1.5"
     },
+    "fabpot/goutte": {
+        "version": "v3.2.3"
+    },
     "fig/link-util": {
         "version": "1.0.0"
     },
@@ -125,8 +128,20 @@
     "gedmo/doctrine-extensions": {
         "version": "v2.4.36"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.3"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.4.2"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "mbezhanov/faker-provider-collection": {
+        "version": "1.1.1"
     },
     "monolog/monolog": {
         "version": "1.23.0"
@@ -163,6 +178,9 @@
     },
     "psr/container": {
         "version": "1.0.0"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
     },
     "psr/link": {
         "version": "1.0.0"

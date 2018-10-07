@@ -12,11 +12,12 @@ class AppFixtures extends Fixture
     {
         // use the factory to create a Faker\Generator instance
         $faker = Faker\Factory::create('fr_FR');
+        $faker->addProvider(new \Bezhanov\Faker\Provider\fr_FR\Food($faker));
 
         // create 20 recettes! Bam!
         for ($i = 0; $i < 20; $i++) {
             $recette = new Recette();
-            $recette->setTitre('recette '.$i);
+            $recette->setTitre($faker->ingredient. ' with '. $faker->spice );
             $recette->setDescription($faker->text);
             // $recette->setDateCreation($faker->dateTimeThisMonth());
 

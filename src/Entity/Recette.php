@@ -39,6 +39,11 @@ class Recette
     private $description;
 
     /**
+     * @ORM\Column(type="text",nullable=true)
+     */
+    private $img;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Avis", mappedBy="recette")
      */
     private $avis;
@@ -107,6 +112,18 @@ class Recette
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): self
+    {
+        $this->img = $img;
+
+        return $this;
     }
 
     public function __toString()
