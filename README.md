@@ -119,3 +119,9 @@ editer mailer conf in .env
 - autoriser https://myaccount.google.com/lesssecureapps
 
 https://symfony.com/doc/current/email.html
+
+## avoir des logs
+
+https://symfony.com/doc/current/logging.html
+
+`https://symfony.com/doc/current/logging.html`
