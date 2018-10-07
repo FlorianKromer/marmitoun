@@ -86,7 +86,7 @@ class Avis
         return $this->recette;
     }
 
-    public function setRecette(?Category $recette): self
+    public function setRecette(?Recette $recette): self
     {
         $this->recette = $recette;
 
