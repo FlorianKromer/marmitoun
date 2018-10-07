@@ -9,7 +9,17 @@
   <p class="lead">{{recette.description}}</p>
   <p>Créée le {{recette.dateCreation|date('d-m-Y H:i')}}</p>
   <a href="{{ path('index') }}" class="btn btn btn-outline-secondary">Retour</a>
-
-
+  <br>
+  <h2>Commentaires</h2>
+  {% for avis in recette.avis %}
+  <div class="media">
+    <img class="mr-3" src="holder.js/64x64?theme=thumb&bg=55595c&fg=eceeef" alt="Generic placeholder image">
+    <div class="media-body">
+      <h5 class="mt-0">{{avis.pseudo}}</h5>
+      {{avis.contenu}}
+    </div>
+  </div>
+  <hr />
+  {% endfor %}
 </main>
 {% endblock %}

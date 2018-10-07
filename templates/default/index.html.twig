@@ -21,6 +21,7 @@
                                     <a href="{{ path('recette_show', {'slug': recette.slug}) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
                                 </div>
                                 <small class="text-muted">Créé le {{recette.dateCreation|date('d-m-Y H:i')}}.</small>
+                                <small class="text-muted">{{recette.avis|length}} commentaires</small>
                             </div>
                         </div>
                     </div>
