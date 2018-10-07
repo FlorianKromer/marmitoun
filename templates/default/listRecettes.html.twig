@@ -1,0 +1,64 @@
+{% extends 'default/layout.html.twig' %}
+
+{% block title %}Accueil !{% endblock %}
+
+{% block main %}
+
+<main role="main">
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="count">
+                {{ pagination.getTotalItemCount }} recettes trouvées
+            </div>
+            <br />
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Trier par ...
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {{ knp_pagination_sortable(pagination, 'Id', 'a.id',{'class':'dropdown-item'}) }}
+                    {{ knp_pagination_sortable(pagination,'Titre', 'a.titre',{'class':'dropdown-item'}) }}
+                    {{ knp_pagination_sortable(pagination,'Date création', ['a.dateCreation'
+                    ],{'class':'dropdown-item'}) }} </div>
+            </div>
+
+            <div class="row">
+
+                {# table body #}
+                {% for recette in pagination %}
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        {% if recette.img is empty %}
+                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
+                            alt="Card image cap">
+                        {% else %}
+                        <img class="card-img-top" src="{{recette.img}}" alt="Card image cap">
+
+                        {% endif %}
+
+                        <div class="card-body">
+                            <p class="card-text">{{recette.titre}} </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{{ path('recette_show', {'slug': recette.slug}) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
+                                </div>
+                                <small class="text-muted">Créé le {{recette.dateCreation|date('d-m-Y H:i')}}.</small>
+                                <small class="text-muted">{{recette.avis|length}} commentaires</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <br />
+                {# display navigation #}
+            </div>
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}

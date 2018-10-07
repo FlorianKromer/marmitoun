@@ -157,6 +157,10 @@ on va scrapper marmitton
 on crée une "console command"
 https://symfony.com/doc/current/console.html
 
+on la lance avec
+
+> php bin/console scrap:recette
+
 on va avoir besoin d'un client pour aller récupérer des données "à l'extéieur"
 
 > composer require fabpot/goutte
@@ -169,3 +173,13 @@ en bonus une progress bar
 https://symfony.com/doc/current/components/console/helpers/progressbar.html
 
 on montre la photo de la recette si le champs img est renseigné
+
+## Pouvoir paginer les résultats
+
+https://github.com/KnpLabs/KnpPaginatorBundle/blob/master/README.md
+
+ajouter un fichier de config knp_paginator.yaml
+
+nouvelle action dans le controlleur
+nouvelle vue twig
+un peu de bootstrap

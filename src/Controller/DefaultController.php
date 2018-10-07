@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Knp\Component\Pager\PaginatorInterface;
 
 class DefaultController extends AbstractController
 {
@@ -25,6 +26,31 @@ class DefaultController extends AbstractController
         return $this->render('default/index.html.twig', [
             'recettes' => $recettes,
         ]);
+    }
+
+    /**
+     * @Route("/liste_recettes", name="liste_recettes")
+     */
+    public function listeRecettes(PaginatorInterface $paginator,Request $request)
+    {
+        $em    = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM App:Recette a";
+        $query = $em->createQuery($dql);
+
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
+        // parameters to template
+        return $this->render('default/listRecettes.html.twig', array('pagination' => $pagination));
+        // $recettes = $this->getDoctrine()
+        // ->getRepository(Recette::class)
+        // ->findAll();
+        // return $this->render('default/index.html.twig', [
+        //     'recettes' => $recettes,
+        // ]);
     }
 
     /**
