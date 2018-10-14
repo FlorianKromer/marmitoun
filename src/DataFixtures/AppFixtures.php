@@ -25,6 +25,7 @@ class AppFixtures extends Fixture
                 $avis = new Avis;
                 $avis->setPseudo($faker->name);
                 $avis->setContenu($faker->realtext);
+                $avis->setEmail($faker->email);
                 $avis->setRecette($recette);
                 $recette->getAvis()[] = $avis;
                 $manager->persist($avis);

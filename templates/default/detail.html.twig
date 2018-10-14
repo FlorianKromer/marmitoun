@@ -11,6 +11,7 @@
   <a href="{{ path('index') }}" class="btn btn btn-outline-secondary">Retour</a>
   <br>
   <h2>Commentaires</h2>
+  {{ form_start(form) }} {{ form_widget(form) }} {{ form_end(form) }}
   {% for avis in recette.avis %}
   <div class="media">
     <img class="mr-3" src="holder.js/64x64?theme=thumb&bg=55595c&fg=eceeef" alt="Generic placeholder image">

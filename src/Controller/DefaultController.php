@@ -6,15 +6,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Recette;
-use App\Entity\Contact;
+//avis + event observer/observable
+use App\Entity\Avis;
+use App\EventSubscriber\AvisCreatedEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+//pagination
+use Knp\Component\Pager\PaginatorInterface;
+//form type import
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Knp\Component\Pager\PaginatorInterface;
-
 class DefaultController extends AbstractController
 {
+    private $eventDispatcher;
+
+    public function __construct(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
     /**
      * @Route("/", name="index")
      */
@@ -45,18 +55,13 @@ class DefaultController extends AbstractController
 
         // parameters to template
         return $this->render('default/listRecettes.html.twig', array('pagination' => $pagination));
-        // $recettes = $this->getDoctrine()
-        // ->getRepository(Recette::class)
-        // ->findAll();
-        // return $this->render('default/index.html.twig', [
-        //     'recettes' => $recettes,
-        // ]);
+        
     }
 
     /**
      * @Route("/detail/{slug}", name="recette_show")
      */
-    public function show($slug)
+    public function show(Request $request,$slug)
     {
         $recette = $this->getDoctrine()
         ->getRepository(Recette::class)
@@ -67,42 +72,41 @@ class DefaultController extends AbstractController
                 'No recette found for id '.$slug
             );
         }
-        return $this->render('default/detail.html.twig', [
-            'recette' => $recette,
-        ]);
-    }
-
-    /**
-     * @Route("/contact", name="contact")
-     */
-    public function contact(Request $request, \Swift_Mailer $mailer)
-    {
-        $contact = new Contact();
-        $form = $this->createFormBuilder($contact)
-        ->add('name')
-        ->add('subject')
-        ->add('content',TextareaType::class)
-        ->add('mail', EmailType::class)
-        ->add('tel', TelType::class)
+        $avis = new Avis();
+        $avis->setRecette($recette);
+        $form = $this->createFormBuilder($avis)
+        ->add('pseudo')
+        ->add('contenu',TextareaType::class)
+        ->add('email', EmailType::class)
         ->add('send', SubmitType::class)
         ->getForm();
-
         if ($request->getMethod() == 'POST') {
 
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                // tell Doctrine you want to (eventually) save the Product (no queries yet)
+                $entityManager->persist($avis);
 
-                $message = (new \Swift_Message('Message de '. $contact->getName()))
-                ->setFrom($contact->getMail())
-                ->setTo(getenv('SEND_TO'))
-                ->setReplyTo($contact->getMail())
-                ->setBody($this->renderView('mail/mail_contact.html.twig', array('contact' => $contact)),'text/html')
-                ;
-                $mailer->send($message);
-                $this->addFlash('notice', 'Votre message a bien été envoyé');
+                // actually executes the queries (i.e. the INSERT query)
+                $entityManager->flush();
+                // creates the OrderPlacedEvent and dispatches it
+                $event = new AvisCreatedEvent($avis);
+                
+                $this->eventDispatcher->dispatch(AvisCreatedEvent::NAME, $event);
+                return $this->redirect($request->getUri());
+
             }
         }
-        return $this->render('default/contact.html.twig',array('form' => $form->createView()));
-    }
+        else{
+
+            return $this->render('default/detail.html.twig', [
+                'recette' => $recette,
+                'form' => $form->createView()
+                ]);
+            }
+        }
+
+  
 }

@@ -183,3 +183,17 @@ ajouter un fichier de config knp_paginator.yaml
 nouvelle action dans le controlleur
 nouvelle vue twig
 un peu de bootstrap
+
+## Utiliser le système d'evenement
+
+tourne autour du design pattern : observer/observable et consumer producer
+https://symfony.com/doc/current/components/event_dispatcher.html
+
+le but est de créer un système qui dit :
+j'ai réalisé tel tache, si quelqu'un a besoin de l'info, qu'il la prenne.
+
+Je crée un evenement : AvisCreatedEvent
+Je crée un souscriveur d'evenement : avissubscriber que je declare dans service.yaml - il va envoyer un message à la personne qui a créé la recette en disant que quelqu'un a ajouter un commentaire
+dans la méthode du controller, après avoir enregistrer l'avis, je dis "j'ai enregistrer un avis"
+
+on peut montrer dans le debugbar que sur la requete post, dans l'onglet event, on retrouve le notre

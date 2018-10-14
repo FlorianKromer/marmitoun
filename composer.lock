@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66549c85838c4f998e0e0f9dcb293c1e",
+    "content-hash": "be0771aa99127582ba4be04b41c97eea",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -3872,7 +3872,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v4.1.4",
+            "version": "v4.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",

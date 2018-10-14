@@ -22,6 +22,7 @@
         "symfony/browser-kit": "*",
         "symfony/console": "*",
         "symfony/dom-crawler": "*",
+        "symfony/event-dispatcher": "*",
         "symfony/expression-language": "*",
         "symfony/flex": "^1.1",
         "symfony/form": "*",
