@@ -2,21 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\Avis;
+use App\Entity\Recette;
+use App\EventSubscriber\AvisCreatedEvent;
+use Knp\Component\Pager\PaginatorInterface;
+//avis + event observer/observable
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+//pagination
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+//form type import
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Recette;
-//avis + event observer/observable
-use App\Entity\Avis;
-use App\EventSubscriber\AvisCreatedEvent;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-//pagination
-use Knp\Component\Pager\PaginatorInterface;
-//form type import
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 class DefaultController extends AbstractController
 {
     private $eventDispatcher;
@@ -25,6 +25,7 @@ class DefaultController extends AbstractController
     {
         $this->eventDispatcher = $eventDispatcher;
     }
+
     /**
      * @Route("/", name="index")
      */
@@ -33,6 +34,7 @@ class DefaultController extends AbstractController
         $recettes = $this->getDoctrine()
         ->getRepository(Recette::class)
         ->findAll();
+
         return $this->render('default/index.html.twig', [
             'recettes' => $recettes,
         ]);
@@ -41,10 +43,10 @@ class DefaultController extends AbstractController
     /**
      * @Route("/liste_recettes", name="liste_recettes")
      */
-    public function listeRecettes(PaginatorInterface $paginator,Request $request)
+    public function listeRecettes(PaginatorInterface $paginator, Request $request)
     {
-        $em    = $this->getDoctrine()->getManager();
-        $dql   = "SELECT a FROM App:Recette a";
+        $em = $this->getDoctrine()->getManager();
+        $dql = 'SELECT a FROM App:Recette a';
         $query = $em->createQuery($dql);
 
         $pagination = $paginator->paginate(
@@ -54,14 +56,13 @@ class DefaultController extends AbstractController
         );
 
         // parameters to template
-        return $this->render('default/listRecettes.html.twig', array('pagination' => $pagination));
-        
+        return $this->render('default/listRecettes.html.twig', ['pagination' => $pagination]);
     }
 
     /**
      * @Route("/detail/{slug}", name="recette_show")
      */
-    public function show(Request $request,$slug)
+    public function show(Request $request, $slug)
     {
         $recette = $this->getDoctrine()
         ->getRepository(Recette::class)
@@ -76,12 +77,11 @@ class DefaultController extends AbstractController
         $avis->setRecette($recette);
         $form = $this->createFormBuilder($avis)
         ->add('pseudo')
-        ->add('contenu',TextareaType::class)
+        ->add('contenu', TextareaType::class)
         ->add('email', EmailType::class)
         ->add('send', SubmitType::class)
         ->getForm();
-        if ($request->getMethod() == 'POST') {
-
+        if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -93,20 +93,16 @@ class DefaultController extends AbstractController
                 $entityManager->flush();
                 // creates the OrderPlacedEvent and dispatches it
                 $event = new AvisCreatedEvent($avis);
-                
+
                 $this->eventDispatcher->dispatch(AvisCreatedEvent::NAME, $event);
+
                 return $this->redirect($request->getUri());
-
             }
-        }
-        else{
-
+        } else {
             return $this->render('default/detail.html.twig', [
                 'recette' => $recette,
-                'form' => $form->createView()
+                'form' => $form->createView(),
                 ]);
-            }
         }
-
-  
+    }
 }

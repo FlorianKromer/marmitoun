@@ -2,16 +2,15 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RecetteRepository")
  * @ApiResource
-
  */
 class Recette
 {
@@ -53,7 +52,6 @@ class Recette
      * @ORM\Column(length=128, unique=true)
      */
     private $slug;
-
 
     public function __construct()
     {

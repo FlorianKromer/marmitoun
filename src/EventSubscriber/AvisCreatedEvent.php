@@ -1,8 +1,9 @@
 <?php
+
 namespace App\EventSubscriber;
 
-use Symfony\Component\EventDispatcher\Event;
 use App\Entity\Avis;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * The avis.created event is dispatched each time an avis is created

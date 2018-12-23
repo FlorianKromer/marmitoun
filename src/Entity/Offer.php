@@ -1,4 +1,5 @@
 <?php
+
 // api/src/Entity/Offer.php
 
 namespace App\Entity;

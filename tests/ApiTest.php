@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -11,7 +12,6 @@ class ApiTest extends WebTestCase
 
         $client->request('GET', '/api/recettes.json');
 
-        
         // var_dump($client->getResponse()->getContent());
         $this->assertTrue($client->getResponse()->isSuccessful(), 'response status is 2xx');
         // asserts that the "Content-Type" header is "application/json"
@@ -27,6 +27,5 @@ class ApiTest extends WebTestCase
         $this->assertInternalType('array', $content);
         $recette = $content[0];
         $this->assertArrayHasKey('titre', $recette);
-
     }
 }

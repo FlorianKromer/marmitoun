@@ -2,15 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AvisRepository")
  * @ApiResource
-
  */
 class Avis
 {
@@ -39,11 +37,8 @@ class Avis
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
-
      */
     private $dateCreation;
-
-
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Recette", inversedBy="avis")
@@ -114,6 +109,4 @@ class Avis
 
         return $this;
     }
-
-    
 }

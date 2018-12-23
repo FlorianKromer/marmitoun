@@ -1,11 +1,12 @@
 <?php
+
 // api/src/Entity/Product.php
 
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -22,7 +23,7 @@ class Product // The class name will be used to name exposed resources
     public $id;
 
     /**
-     * @var string $name A name property - this description will be available in the API documentation too.
+     * @var string A name property - this description will be available in the API documentation too.
      *
      * @ORM\Column
      * @Assert\NotBlank

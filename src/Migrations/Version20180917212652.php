@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
@@ -10,10 +12,10 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20180917212652 extends AbstractMigration
 {
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
+        $this->abortIf('sqlite' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'sqlite\'.');
 
         $this->addSql('DROP INDEX IDX_8F91ABF089312FE9');
         $this->addSql('CREATE TEMPORARY TABLE __temp__avis AS SELECT id, recette_id, pseudo, contenu, date_creation FROM avis');
@@ -30,10 +32,10 @@ final class Version20180917212652 extends AbstractMigration
         $this->addSql('CREATE UNIQUE INDEX UNIQ_49BB6390989D9B62 ON recette (slug)');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
+        $this->abortIf('sqlite' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'sqlite\'.');
 
         $this->addSql('DROP INDEX IDX_8F91ABF089312FE9');
         $this->addSql('CREATE TEMPORARY TABLE __temp__avis AS SELECT id, recette_id, pseudo, contenu, date_creation FROM avis');

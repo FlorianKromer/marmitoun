@@ -1,27 +1,28 @@
 <?php
+
 namespace App\Command;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Goutte\Client;
-use Symfony\Component\DomCrawler\Crawler;
 use App\Entity\Recette;
 use Doctrine\Common\Persistence\ObjectManager;
+use Goutte\Client;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
-
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DomCrawler\Crawler;
 
 class ScrapRecetteCommand extends Command
 {
     private $objectManager;
     private $progressBar;
-    
+
     public function __construct(ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
 
         parent::__construct();
     }
+
     protected function configure()
     {
         $this
@@ -47,17 +48,18 @@ class ScrapRecetteCommand extends Command
         $this->progressBar = new ProgressBar($output, 100);
         $this->progressBar->start();
 
-        $recipes = 
+        $recipes =
             $this->scrap('https://www.marmiton.org/recettes/top-internautes-entree.aspx');
-        $output->writeln(['',count($recipes) . ' recettes extraites']);
+        $output->writeln(['', \count($recipes).' recettes extraites']);
         foreach ($recipes as $r) {
-            if($r !== null)
+            if (null !== $r) {
                 $this->objectManager->persist($r);
+            }
         }
         $this->objectManager->flush();
         $this->progressBar->finish();
 
-        $output->writeln(count($recipes) . ' recettes chargées');
+        $output->writeln(\count($recipes).' recettes chargées');
     }
 
     public function scrap($url)
@@ -65,7 +67,6 @@ class ScrapRecetteCommand extends Command
         $client = new Client();
         $crawler = $client->request('GET', $url);
         $recettes = $crawler->filterXPath('//a[contains(@class, "recipe-card-link")]')->each(function (Crawler $parent, $i) {
-            
             // var_dump($parent->filterXPath('//h4[contains(@class, "recipe-card__description")]')->text());
             $recette = new Recette();
             $recette->setTitre($parent->filterXPath('//h4[contains(@class, "recipe-card__title")]')->text());
@@ -75,6 +76,7 @@ class ScrapRecetteCommand extends Command
 
             return $recette;
         });
+
         return $recettes;
     }
 }

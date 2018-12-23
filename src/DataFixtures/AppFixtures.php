@@ -1,12 +1,13 @@
 <?php
+
 namespace App\DataFixtures;
 
-use App\Entity\Recette;
 use App\Entity\Avis;
+use App\Entity\Recette;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker;
-use \Bezhanov\Faker\ProviderCollectionHelper;
+
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
@@ -16,14 +17,14 @@ class AppFixtures extends Fixture
         \Bezhanov\Faker\ProviderCollectionHelper::addAllProvidersTo($faker);
 
         // create 20 recettes! Bam!
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20; ++$i) {
             $recette = new Recette();
-            $recette->setTitre($faker->ingredient. ' with '. $faker->spice );
+            $recette->setTitre($faker->ingredient.' with '.$faker->spice);
             $recette->setDescription($faker->text);
             // $recette->setDateCreation($faker->dateTimeThisMonth());
 
-            for ($j=0; $j < mt_rand(0,3); $j++) { 
-                $avis = new Avis;
+            for ($j = 0; $j < mt_rand(0, 3); ++$j) {
+                $avis = new Avis();
                 $avis->setPseudo($faker->name);
                 $avis->setContenu($faker->realtext);
                 $avis->setEmail($faker->email);
@@ -31,11 +32,9 @@ class AppFixtures extends Fixture
                 $recette->getAvis()[] = $avis;
                 $manager->persist($avis);
             }
-            
 
             $manager->persist($recette);
         }
-
 
         $manager->flush();
     }

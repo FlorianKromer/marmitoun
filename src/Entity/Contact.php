@@ -2,27 +2,21 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
- * Contact
- *
+ * Contact.
  */
 class Contact
 {
-    
-
     /**
      * @var string
-      * @Assert\NotBlank()
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var string
-     *
      */
     private $subject;
 
@@ -35,23 +29,19 @@ class Contact
     /**
      * @var string
      * @Assert\NotBlank()
-
      */
     private $mail;
 
     /**
      * @var string
-     *
      */
     private $tel;
 
-
-    
-
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return Contact
      */
     public function setName($name)
@@ -62,9 +52,9 @@ class Contact
     }
 
     /**
-     * Get name
+     * Get name.
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -72,9 +62,10 @@ class Contact
     }
 
     /**
-     * Set subject
+     * Set subject.
      *
      * @param string $subject
+     *
      * @return Contact
      */
     public function setSubject($subject)
@@ -85,9 +76,9 @@ class Contact
     }
 
     /**
-     * Get subject
+     * Get subject.
      *
-     * @return string 
+     * @return string
      */
     public function getSubject()
     {
@@ -95,9 +86,10 @@ class Contact
     }
 
     /**
-     * Set content
+     * Set content.
      *
      * @param string $content
+     *
      * @return Contact
      */
     public function setContent($content)
@@ -108,9 +100,9 @@ class Contact
     }
 
     /**
-     * Get content
+     * Get content.
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -118,9 +110,10 @@ class Contact
     }
 
     /**
-     * Set mail
+     * Set mail.
      *
      * @param string $mail
+     *
      * @return Contact
      */
     public function setMail($mail)
@@ -131,9 +124,9 @@ class Contact
     }
 
     /**
-     * Get mail
+     * Get mail.
      *
-     * @return string 
+     * @return string
      */
     public function getMail()
     {
@@ -141,9 +134,10 @@ class Contact
     }
 
     /**
-     * Set tel
+     * Set tel.
      *
      * @param string $tel
+     *
      * @return Contact
      */
     public function setTel($tel)
@@ -154,9 +148,9 @@ class Contact
     }
 
     /**
-     * Get tel
+     * Get tel.
      *
-     * @return string 
+     * @return string
      */
     public function getTel()
     {
