@@ -6,13 +6,14 @@ use App\Entity\Avis;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker;
+use \Bezhanov\Faker\ProviderCollectionHelper;
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
         // use the factory to create a Faker\Generator instance
         $faker = Faker\Factory::create('fr_FR');
-        $faker->addProvider(new \Bezhanov\Faker\Provider\fr_FR\Food($faker));
+        \Bezhanov\Faker\ProviderCollectionHelper::addAllProvidersTo($faker);
 
         // create 20 recettes! Bam!
         for ($i = 0; $i < 20; $i++) {
