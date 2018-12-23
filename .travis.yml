@@ -28,7 +28,7 @@ install:
   - php bin/console doctrine:database:create
   - php bin/console doctrine:schema:update --force
   - php bin/console doctrine:fixtures:load -n
-  - ./bin/phpunit install
+#  - ./bin/phpunit install
 
 script:
   - ./bin/phpunit
