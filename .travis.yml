@@ -11,14 +11,13 @@ env:
     - SYMFONY_PHPUNIT_DIR=./bin/.phpunit
     - SYMFONY_DEPRECATIONS_HELPER=29
 
+services:
+  - mysql
+  
 matrix:
   fast_finish: true
   include:
-    - php: 7.1.18
     - php: 7.2
-    - php: nightly
-  allow_failures:
-    - php: nightly
 
 before_install:
   - '[[ "$TRAVIS_PHP_VERSION" == "nightly" ]] || phpenv config-rm xdebug.ini'
@@ -26,6 +25,9 @@ before_install:
 
 install:
   - composer install
+  - php bin/console doctrine:database:create
+  - php bin/console doctrine:schema:update --force
+  - php bin/console doctrine:fixtures:load -n
   - ./bin/phpunit install
 
 script:
